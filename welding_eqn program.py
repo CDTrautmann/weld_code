@@ -57,17 +57,17 @@ def FuncChoose():
     return(calc_pref)
 
 # call the function the User chose
-def FuncCall(calc_pref,q,U,k,alpha,T_o,T,d,Ry,d_s,Ro,Reg,intermed):
+def FuncCall(calc_pref,q,U,alpha,k,T_o,T,d,Ry,d_s,Ro,Reg,intermed):
     if calc_pref == 0:
         print('done')
     elif calc_pref == 1:
-        y_haz = Calc_fcns.Yhaz(q,U,k,alpha,T_o,T,d,Ro,Reg)
+        y_haz = Calc_fcns.Yhaz(q,U,alpha,k,T_o,T,d,Ro,Reg)
         print(y_haz)
     elif calc_pref == 2:
-        Tb = Calc_fcns.CoolRate(q,U,k,alpha,T,T_o,d,Ro,Reg)
+        Tb = Calc_fcns.CoolRate(q,U,alpha,k,T,T_o,d,Ro,Reg)
         print(Tb)
     elif calc_pref == 3:
-        y_max = Calc_fcns.Ymax(q,U,k,alpha,T,T_o,d,Ro,Reg)
+        y_max = Calc_fcns.Ymax(q,U,alpha,k,T,T_o,d,Ro,Reg)
         print(y_max)
 
 def main():
