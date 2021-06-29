@@ -1,4 +1,4 @@
-# calculation functions test changes jbsdofinajksdcfna df
+# calculation functions
 import numpy as np
 def Ymax(q,U,k,alpha,T,T_o,d,Ro,Reg):
     if Reg == 1:
