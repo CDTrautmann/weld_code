@@ -15,7 +15,7 @@ def Ymax(q,U,k,alpha,T,T_o,d,Ro,Reg):
         print('regime error')
     return(y_max)
 
-def Yhaz(q,U,k,alpha,T,T_o,d,Ro,Reg,):
+def Yhaz(q,U,k,alpha,T_o,T,d,Ro,Reg,):
     T_m = float(input('enter melting temp '))
     T_haz = float(input('enter HAZ temp'))
 

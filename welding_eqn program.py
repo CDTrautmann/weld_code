@@ -61,7 +61,7 @@ def FuncCall(calc_pref,q,U,k,alpha,T_o,T,d,Ry,d_s,Ro,Reg,intermed):
     if calc_pref == 0:
         print('done')
     elif calc_pref == 1:
-        y_haz = Calc_fcns.Yhaz(q,U,k,alpha,T,T_o,d,Ro,Reg)
+        y_haz = Calc_fcns.Yhaz(q,U,k,alpha,T_o,T,d,Ro,Reg)
         print(y_haz)
     elif calc_pref == 2:
         Tb = Calc_fcns.CoolRate(q,U,k,alpha,T,T_o,d,Ro,Reg)
