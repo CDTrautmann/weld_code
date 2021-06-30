@@ -1,19 +1,40 @@
 import numpy as np
 import Calc_fcns
+import tkinter as tk
+import tkinter.messagebox as messagebox
+
+
+def GUiTest():
+
+    root = tk.Tk()
+    label=tk.Label(root, text='make a selection',padx=20,pady=20)
+    label.pack()
+
+    ent = tk.Entry(root)
+    ent.pack()
+    
+    Coolbutt = tk.Button(root, text='cool rate')
+    Coolbutt.pack()
+
+    parbutt = tk.Button(root, text="Ymax", command = ParamIn)
+    parbutt.pack()
+    root.mainloop()
+
 
 # function to take user parameters
 def ParamIn():
-    q = float(input('enter heat input '))
-    U = float(input('enter travel speed '))
-    alpha = float(input('enter thermal diffusivity '))
-    k = float(input('enter thermal conductivity '))
-    T_o = float(input('enter ambient temperature in C '))
-    T = float(input('enter intermediate temperature '))
-    d= float(input('enter plate thickness(m) '))
-    Ry= q*U/(4*np.pi*k*alpha*(T-T_o))
-    d_s = (U*d)/(2*alpha)
-    Ro = Ry/d_s
-    return(q,U,alpha,k,T_o,T,d,Ry,d_s,Ro)
+    weldp = {}
+    weldp['q'] = float(input('enter heat input '))
+    weldp['U'] = float(input('enter travel speed '))
+    weldp['alpha'] = float(input('enter thermal diffusivity '))
+    weldp['k'] = float(input('enter thermal conductivity '))
+    weldp['T_o'] = float(input('enter ambient temperature in C '))
+    weldp['T']=float(input('enter intermediate temperature '))
+    weldp['d']= float(input('enter plate thickness(m) '))
+    weldp['Ry']= weldp['q']*weldp['U']/(4*np.pi*weldp['k']*weldp['alpha']*(weldp['T']-weldp['T_o']))
+    weldp['d_s'] = (weldp['U']*weldp['d'])/(2*weldp['alpha'])
+    weldp['Ro'] = weldp['Ry']/weldp['d_s']
+    return(weldp)
 
 # function to determine regime
 def regimeSet(Ry,d_s):
@@ -57,23 +78,23 @@ def FuncChoose():
     return(calc_pref)
 
 # call the function the User chose
-def FuncCall(calc_pref,q,U,alpha,k,T_o,T,d,Ry,d_s,Ro,Reg,intermed):
+def FuncCall(calc_pref,Reg,intermed,weldp):
     if calc_pref == 0:
         print('done')
     elif calc_pref == 1:
-        y_haz = Calc_fcns.Yhaz(q,U,alpha,k,T_o,T,d,Ro,Reg)
+        y_haz = Calc_fcns.Yhaz(weldp,Reg)
         print(y_haz)
     elif calc_pref == 2:
-        Tb = Calc_fcns.CoolRate(q,U,alpha,k,T,T_o,d,Ro,Reg)
+        Tb = Calc_fcns.CoolRate(weldp,Reg)
         print(Tb)
     elif calc_pref == 3:
-        y_max = Calc_fcns.Ymax(q,U,alpha,k,T,T_o,d,Ro,Reg)
+        y_max = Calc_fcns.Ymax(weldp,Reg)
         print(y_max)
 
 def main():
-    q,U,alpha,k,T_o,T,d,Ry,d_s,Ro = ParamIn()
-    Reg,intermed = regimeSet(Ry,d_s)
+    weldp = ParamIn()
+    Reg,intermed= regimeSet(weldp['Ry'],weldp['d_s'])
     calc_pref = FuncChoose()
-    FuncCall(calc_pref,q,U,alpha,k,T_o,T,d,Ry,d_s,Ro,Reg,intermed)
+    FuncCall(calc_pref,Reg,intermed,weldp)
 
 main()
