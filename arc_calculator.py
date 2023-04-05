@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 def Arc_sweep():
-    I_weld = np.linspace(150,300,5)
+    I_weld = np.linspace(100,300,7)
     V_weld = np.linspace(15,35,21)
     Rho_wire = 2.87e-13 #ohm/m
     V_arc = 0.8e3 #V/m
-    CTWD = 14.5e-3#m
+    CTWD = 25.4e-3#m
     R_lead = 8.2e-3 #ohm
     R_ct = 0.2e-3 #ohm
     V_an = 4.2 #V
@@ -30,7 +30,8 @@ def Arc_sweep():
     for dex,cur in enumerate(l_arc_array[:,0]):
         pt = plt.plot(V_weld,l_arc_array[dex,1:],label = str(l_arc_array[dex,0]))
     pt = plt.plot(V_weld,np.zeros((len(V_weld))),label = 'short circuit')
-    pt = plt.plot(V_weld,np.zeros((len(V_weld)))+14.5, label = 'burn back limmit')
+    pt = plt.plot(V_weld,np.zeros((len(V_weld)))+(CTWD*1000), label = 'burn back limmit')
+    pt = plt.plot(V_weld,np.zeros(len(V_weld))+12.7)
     plt.legend()
     plt.xlabel('voltage (V)')
     plt.ylabel('Arc length (mm)')
@@ -69,3 +70,6 @@ def find_CTWD(Arc_l,V_weld,I_weld):
     P = V_weld * I_weld
     CTWD = ((I_weld*Arc_l*(((I_weld**2)*Rho_wire)+V_arc))+P_tot-P)/((I_weld**2)*Rho_wire)
     return(CTWD)
+
+
+Arc_sweep()
