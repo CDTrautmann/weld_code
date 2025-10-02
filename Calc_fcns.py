@@ -28,7 +28,7 @@ def Yhaz(weldp,Reg):
         y_haz = weldp['q']*weldp['alpha']/np.sqrt(2*np.e*np.pi)/weldp['k']/weldp['d']/weldp['U']*(T_m-T_haz)/(weldp['T']-weldp['T_o'])**2
     elif Reg == 4:
         gam = float(input('enter gamma '))
-        8*np.pi*weldp['k']*weldp['alpha']*weldp['d']/weldp['q']/weldp['U']*(T_m-T_haz)/np.exp(gam+(1/weldp['Ro']))
+        y_haz = 8*np.pi*weldp['k']*weldp['alpha']*weldp['d']/weldp['q']/weldp['U']*(T_m-T_haz)/np.exp(gam+(1/weldp['Ro']))
     else:
         print('regime error')
     return(y_haz)
